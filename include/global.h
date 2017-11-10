@@ -6,6 +6,13 @@
 #define ETX			0x03
 #define DLE			0x10
 
+#define LOG_RECV	0
+#define LOG_SEND	1
+#define LOG_ERROR	2
+#define LOG_DEBUG	3
+
+#define LOG_FILE	"tpulog.log"
+
 unsigned short crc_ccitt(char *string,int string_len);//crc_ccitt校验
 int md5(char* fileName,char *md5_data);//md5校验
 void init_serial(int serial_fd);//初始化串口
@@ -13,6 +20,7 @@ int read_from_serial(int serial_fd,char *command_recv);//从串口读命令或�
 int write_to_serial(int serial_fd,char *command_send,int send_len);//写串口，一直写完send_len个字节
 int pack(char *string,int string_len,char *pack_end_string);//组包函数
 int unpack(char *string,int string_len,char *unpack_end_string);//解包函数
+void tpulog(int log_grade,char *log_info,int log_info_len);//打印日志
 
 //错误码
 #define CrcCheckError		 0x31	//crc校验失败
